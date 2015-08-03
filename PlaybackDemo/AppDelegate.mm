@@ -29,14 +29,13 @@
     NSString* message = @"Register App success!";
     if (error != RegisterSuccess) {
         message = @"Register App Failed! Please enter your App Key and check the network.";
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Register App" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+
     }else
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RegisterAppSuccess" object:nil];
     }
-    
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Register App" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
-    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

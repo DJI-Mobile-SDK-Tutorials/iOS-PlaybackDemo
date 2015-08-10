@@ -16,7 +16,7 @@
 #define kDownloadAllSelFileAlertTag 102
 #define kDownloadCurrentFileAlertTag 103
 
-@interface DJIRootViewController ()<DJICameraDelegate, DJIDroneDelegate>
+@interface DJIRootViewController ()<DJICameraDelegate, DJIDroneDelegate, DJIAppManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *recordBtn;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *changeWorkModeSegmentControl;
@@ -62,17 +62,9 @@
 
 @implementation DJIRootViewController
 
-- (void)dealloc
-{
-    [self.drone destroy];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [self.drone connectToDrone];
-    [self.camera startCameraSystemStateUpdates];
 
     [[VideoPreviewer instance] setView:self.fpvPreviewView];
     
@@ -85,7 +77,7 @@
     [self.camera stopCameraSystemStateUpdates];
     [self.drone.mainController stopUpdateMCSystemState];
     [self.drone disconnectToDrone];
-
+    [self.drone destroy];
     [[VideoPreviewer instance] setView:nil];
     
 }
@@ -93,13 +85,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerAppSuccess:) name:@"RegisterAppSuccess" object:nil];
-
     [self initData];
     [self initPlaybackMultiSelectVC];
     
-    [[VideoPreviewer instance] start];
-    
+    [self registerApp];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -108,6 +97,31 @@
 }
 
 #pragma mark Custom Methods
+
+- (void)registerApp
+{
+    NSString *appKey = @"Enter Your App Key Here";
+    [DJIAppManager registerApp:appKey withDelegate:self];
+}
+
+#pragma mark DJIAppManagerDelegate Method
+-(void)appManagerDidRegisterWithError:(int)error
+{
+    NSString* message = @"Register App Successed!";
+    if (error != RegisterSuccess) {
+        message = @"Register App Failed! Please enter your App Key and check the network.";
+    }else
+    {
+        NSLog(@"registerAppSuccess");
+        [_drone connectToDrone];
+        [_camera startCameraSystemStateUpdates];
+        [[VideoPreviewer instance] start];
+        
+    }
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Register App" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+}
+
 
 - (void)initData
 {
@@ -161,15 +175,6 @@
         
     }];
 
-}
-
-- (void)registerAppSuccess:(NSNotification *)notification
-{
-    
-    NSLog(@"registerAppSuccess");
-    [self.drone connectToDrone];
-    [self.camera startCameraSystemStateUpdates];
-    
 }
 
 - (NSString *)formattingSeconds:(int)seconds

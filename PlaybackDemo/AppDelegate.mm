@@ -7,35 +7,16 @@
 //
 
 #import "AppDelegate.h"
-#import <DJISDK/DJISDK.h>
 
-@interface AppDelegate ()<DJIAppManagerDelegate>
+@interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-    NSString *appKey = @"Enter your App Key";
-    [DJIAppManager registerApp:appKey withDelegate:self];
     
     return YES;
-}
-
-#pragma mark DJIAppManagerDelegate Method
--(void) appManagerDidRegisterWithError:(int)error
-{
-    NSString* message = @"Register App success!";
-    if (error != RegisterSuccess) {
-        message = @"Register App Failed! Please enter your App Key and check the network.";
-    }else
-    {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"RegisterAppSuccess" object:nil];
-    }
-    
-     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Register App" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-     [alertView show];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

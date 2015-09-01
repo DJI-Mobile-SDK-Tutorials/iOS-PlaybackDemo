@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>9F430010-4959-4DE4-9BC7-78E178D4A89B</string>
 	<key>IDESourceControlProjectName</key>
-	<string>PlaybackDemo</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>CA0F59FFC87979DCD39D9C793907572D68C6ECE3</key>
 		<string>github.com:DJI-Mobile-SDK/iOS-PlaybackDemo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>PlaybackDemo.xcodeproj</string>
+	<string>PlaybackDemo.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>CA0F59FFC87979DCD39D9C793907572D68C6ECE3</key>

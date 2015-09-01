@@ -16,6 +16,17 @@
 #define kDownloadAllSelFileAlertTag 102
 #define kDownloadCurrentFileAlertTag 103
 
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+
+#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
+#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+
 @interface DJIRootViewController ()<DJICameraDelegate, DJIDroneDelegate, DJIAppManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *recordBtn;
@@ -96,6 +107,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (BOOL)prefersStatusBarHidden {
+    return NO;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 #pragma mark Custom Methods
 
 - (void)registerApp
@@ -136,9 +156,21 @@
 
 - (void)initPlaybackMultiSelectVC
 {
-    self.playbackMultiSelectVC = [[DJIPlaybackMultiSelectViewController alloc] initWithNibName:@"DJIPlaybackMultiSelectViewController" bundle:[NSBundle mainBundle]];
+    
+    if (IS_IPAD) {
+        self.playbackMultiSelectVC = [[DJIPlaybackMultiSelectViewController alloc] initWithNibName:@"DJIPlaybackMultiSelectViewController_iPad" bundle:[NSBundle mainBundle]];
+
+    }else if (IS_IPHONE){
+        
+        if (IS_IPHONE_6) {
+            self.playbackMultiSelectVC = [[DJIPlaybackMultiSelectViewController alloc] initWithNibName:@"DJIPlaybackMultiSelectViewController_iPhone6" bundle:[NSBundle mainBundle]];
+        }else if (IS_IPHONE_6P){
+            self.playbackMultiSelectVC = [[DJIPlaybackMultiSelectViewController alloc] initWithNibName:@"DJIPlaybackMultiSelectViewController_iPhone6+" bundle:[NSBundle mainBundle]];
+        }
+    }
+    
     [self.playbackMultiSelectVC.view setFrame:self.view.frame];
-    [self.fpvPreviewView addSubview:self.playbackMultiSelectVC.view];
+    [self.view insertSubview:self.playbackMultiSelectVC.view aboveSubview:self.fpvPreviewView];
     
     __weak DJIRootViewController *weakSelf = self;
     [self.playbackMultiSelectVC setSelectItemBtnAction:^(int index) {
@@ -393,7 +425,8 @@
     }
 
     __weak DJIRootViewController *weakSelf = self;
-    [self.camera downloadAllSelectedFilesWithPreparingBlock:^(NSString *fileName, NSUInteger fileSize, BOOL *skip) {
+    
+    [self.camera downloadAllSelectedFilesWithPreparingBlock:^(NSString *fileName, DJIDownloadFileType fileType, NSUInteger fileSize, BOOL *skip) {
 
         [weakSelf startUpdateTimer];
         weakSelf.totalFileSize = (long)fileSize;

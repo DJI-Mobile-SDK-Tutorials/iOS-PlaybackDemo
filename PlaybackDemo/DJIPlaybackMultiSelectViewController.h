@@ -2,7 +2,7 @@
 //  DJIPlaybackMultiSelectViewController.h
 //  PlaybackDemo
 //
-//  Created by OliverOu on 23/7/15.
+//  Created by DJI on 23/7/15.
 //  Copyright (c) 2015 DJI. All rights reserved.
 //
 

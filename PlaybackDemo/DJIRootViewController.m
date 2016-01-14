@@ -2,7 +2,7 @@
 //  DJIRootViewController.m
 //  PlaybackDemo
 //
-//  Created by OliverOu on 20/7/15.
+//  Created by DJI on 20/7/15.
 //  Copyright (c) 2015 DJI. All rights reserved.
 //
 
@@ -27,7 +27,7 @@
 #define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
 #define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
-@interface DJIRootViewController ()<DJICameraDelegate, DJIDroneDelegate, DJIAppManagerDelegate>
+@interface DJIRootViewController ()<DJICameraDelegate, DJISDKManagerDelegate, DJIPlaybackDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *recordBtn;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *changeWorkModeSegmentControl;
@@ -39,8 +39,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *selectBtn;
 @property (weak, nonatomic) IBOutlet UIButton *selectAllBtn;
 
-@property (strong, nonatomic) DJIDrone *drone;
-@property (strong, nonatomic) DJIInspireCamera* camera;
 @property (strong, nonatomic) DJICameraSystemState* cameraSystemState;
 @property (strong, nonatomic) DJICameraPlaybackState* cameraPlaybackState;
 @property (strong, nonatomic) DJIPlaybackMultiSelectViewController *playbackMultiSelectVC;
@@ -73,23 +71,28 @@
 
 @implementation DJIRootViewController
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 
     [[VideoPreviewer instance] setView:self.fpvPreviewView];
+    [self registerApp];
     
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    
     [super viewWillDisappear:animated];
-    [self.camera stopCameraSystemStateUpdates];
-    [self.drone.mainController stopUpdateMCSystemState];
-    [self.drone disconnectToDrone];
-    [[VideoPreviewer instance] setView:nil];
+
+    __weak DJICamera* camera = [self fetchCamera];
+    if (camera && camera.delegate == self) {
+        [camera setDelegate:nil];
+    }
+    if (camera && camera.playbackManager.delegate == self) {
+        [camera.playbackManager setDelegate:nil];
+    }
     
+    [self cleanVideoPreview];
 }
 
 - (void)viewDidLoad {
@@ -97,8 +100,6 @@
     
     [self initData];
     [self initPlaybackMultiSelectVC];
-    
-    [self registerApp];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -117,38 +118,70 @@
 
 #pragma mark Custom Methods
 
+- (void)cleanVideoPreview {
+    [[VideoPreviewer instance] unSetView];
+    
+    if (self.fpvPreviewView != nil) {
+        [self.fpvPreviewView removeFromSuperview];
+        self.fpvPreviewView = nil;
+    }
+}
+
+- (DJICamera*) fetchCamera {
+    
+    if (![DJISDKManager product]) {
+        return nil;
+    }
+    
+    if ([[DJISDKManager product] isKindOfClass:[DJIAircraft class]]) {
+        return ((DJIAircraft*)[DJISDKManager product]).camera;
+    }
+    
+    return nil;
+}
+
 - (void)registerApp
 {
     NSString *appKey = @"Enter Your App Key Here";
-    [DJIAppManager registerApp:appKey withDelegate:self];
+    [DJISDKManager registerApp:appKey withDelegate:self];
 }
 
-#pragma mark DJIAppManagerDelegate Method
--(void)appManagerDidRegisterWithError:(int)error
+- (void)showAlertViewWithTitle:(NSString *)title withMessage:(NSString *)message
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark DJISDKManagerDelegate Method
+
+-(void) sdkManagerProductDidChangeFrom:(DJIBaseProduct* _Nullable) oldProduct to:(DJIBaseProduct* _Nullable) newProduct
+{
+    __weak DJICamera* camera = [self fetchCamera];
+    [camera setDelegate:self];
+    [camera.playbackManager setDelegate:self];
+
+}
+
+- (void)sdkManagerDidRegisterAppWithError:(NSError *)error
 {
     NSString* message = @"Register App Successed!";
-    if (error != RegisterSuccess) {
+    if (error) {
         message = @"Register App Failed! Please enter your App Key and check the network.";
+
     }else
     {
         NSLog(@"registerAppSuccess");
-        [_drone connectToDrone];
-        [_camera startCameraSystemStateUpdates];
+        [DJISDKManager startConnectionToProduct];
         [[VideoPreviewer instance] start];
-        
     }
-    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Register App" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
+    
+    [self showAlertViewWithTitle:@"Register App" withMessage:message];
 }
-
 
 - (void)initData
 {
-    self.drone = [[DJIDrone alloc] initWithType:DJIDrone_Inspire];
-    self.drone.delegate = self;
-    self.camera = (DJIInspireCamera *)self.drone.camera;
-    self.camera.delegate = self;
-
     self.downloadedImageData = [NSMutableData data];
     self.downloadedImageArray = [NSMutableArray array];
 }
@@ -172,34 +205,37 @@
     [self.view insertSubview:self.playbackMultiSelectVC.view aboveSubview:self.fpvPreviewView];
     
     __weak DJIRootViewController *weakSelf = self;
+
     [self.playbackMultiSelectVC setSelectItemBtnAction:^(int index) {
-        
-        if (weakSelf.cameraPlaybackState.playbackMode == MultipleFilesPreview) {
-            
-            [weakSelf.camera enterSinglePreviewModeWithIndex:index];
-            
-        }else if (weakSelf.cameraPlaybackState.playbackMode == MultipleFilesEdit){
-            [weakSelf.camera selectFileAtIndex:index];
+
+        __weak DJICamera* camera = [weakSelf fetchCamera];
+
+        if (weakSelf.cameraPlaybackState.playbackMode == DJICameraPlaybackModeMultipleFilesPreview) {
+            [camera.playbackManager enterSinglePreviewModeWithIndex:index];
+        }else if (weakSelf.cameraPlaybackState.playbackMode == DJICameraPlaybackModeMultipleFilesEdit){
+            [camera.playbackManager toggleFileSelectionAtIndex:index];
         }
         
     }];
     
     [self.playbackMultiSelectVC setSwipeGestureAction:^(UISwipeGestureRecognizerDirection direction) {
         
-        if (weakSelf.cameraPlaybackState.playbackMode == SingleFilePreview) {
+        __weak DJICamera* camera = [weakSelf fetchCamera];
+
+        if (weakSelf.cameraPlaybackState.playbackMode == DJICameraPlaybackModeSingleFilePreview) {
             
             if (direction == UISwipeGestureRecognizerDirectionLeft) {
-                [weakSelf.camera singlePreviewNextPage];
+                [camera.playbackManager goToNextSinglePreviewPage];
             }else if (direction == UISwipeGestureRecognizerDirectionRight){
-                [weakSelf.camera singlePreviewPreviousPage];
+                [camera.playbackManager goToPreviousSinglePreviewPage];
             }
             
-        }else if(weakSelf.cameraPlaybackState.playbackMode == MultipleFilesPreview){
+        }else if(weakSelf.cameraPlaybackState.playbackMode == DJICameraPlaybackModeMultipleFilesPreview){
             
             if (direction == UISwipeGestureRecognizerDirectionUp) {
-                [weakSelf.camera multiplePreviewNextPage];
+                [camera.playbackManager goToNextMultiplePreviewPage];
             }else if (direction == UISwipeGestureRecognizerDirectionDown){
-                [weakSelf.camera multiplePreviewPreviousPage];
+                [camera.playbackManager goToPreviousMultiplePreviewPage];
             }
             
         }
@@ -220,71 +256,50 @@
 }
 
 #pragma mark - DJICameraDelegate
-
--(void) camera:(DJICamera*)camera didReceivedVideoData:(uint8_t*)videoBuffer length:(int)length
+- (void)camera:(DJICamera *)camera didReceiveVideoData:(uint8_t *)videoBuffer length:(size_t)size
 {
-    uint8_t* pBuffer = (uint8_t*)malloc(length);
-    memcpy(pBuffer, videoBuffer, length);
-    [[VideoPreviewer instance].dataQueue push:pBuffer length:length];
+    uint8_t* pBuffer = (uint8_t*)malloc(size);
+    memcpy(pBuffer, videoBuffer, size);
+    [[VideoPreviewer instance].dataQueue push:pBuffer length:(int)size];
 }
 
--(void) camera:(DJICamera*)camera didUpdateSystemState:(DJICameraSystemState*)systemState
+- (void)camera:(DJICamera *)camera didUpdateSystemState:(DJICameraSystemState *)systemState
 {
-    if (self.drone.droneType == DJIDrone_Inspire) {
-        
-        self.cameraSystemState = systemState;
+    self.cameraSystemState = systemState;
 
-        //Update currentRecordTimeLabel State
-        self.isRecording = systemState.isRecording;
-        [self.currentRecordTimeLabel setHidden:!self.isRecording];
-        [self.currentRecordTimeLabel setText:[self formattingSeconds:systemState.currentRecordingTime]];
-        
-        //Update playbackBtnsView state
-        BOOL isPlayback = (systemState.workMode == CameraWorkModePlayback) || (systemState.workMode == CameraWorkModeDownload);
-        self.playbackBtnsView.hidden = !isPlayback;
-        
-        //Update recordBtn State
-        if (self.isRecording) {
-            [self.recordBtn setTitle:@"Stop Record" forState:UIControlStateNormal];
-        }else
-        {
-            [self.recordBtn setTitle:@"Start Record" forState:UIControlStateNormal];
-        }
-        
-        //Update UISegmented Control's state
-        if (systemState.workMode == CameraWorkModeCapture) {
-            [self.changeWorkModeSegmentControl setSelectedSegmentIndex:0];
-        }else if (systemState.workMode == CameraWorkModeRecord){
-            [self.changeWorkModeSegmentControl setSelectedSegmentIndex:1];
-        }else if (systemState.workMode == CameraWorkModePlayback){
-            [self.changeWorkModeSegmentControl setSelectedSegmentIndex:2];
-        }
+    //Update currentRecordTimeLabel State
+    self.isRecording = systemState.isRecording;
+    [self.currentRecordTimeLabel setHidden:!self.isRecording];
+    [self.currentRecordTimeLabel setText:[self formattingSeconds:systemState.currentVideoRecordingTimeInSeconds]];
+    
+    //Update playbackBtnsView state
+    
+    BOOL isPlayback = (systemState.mode == DJICameraModePlayback) || (systemState.mode == DJICameraModeMediaDownload);
+    self.playbackBtnsView.hidden = !isPlayback;
+    
+    //Update recordBtn State
+    if (self.isRecording) {
+        [self.recordBtn setTitle:@"Stop Record" forState:UIControlStateNormal];
+    }else
+    {
+        [self.recordBtn setTitle:@"Start Record" forState:UIControlStateNormal];
+    }
+    
+    //Update UISegmented Control's state
+    if (systemState.mode == DJICameraModeShootPhoto) {
+        [self.changeWorkModeSegmentControl setSelectedSegmentIndex:0];
+    }else if (systemState.mode == DJICameraModeRecordVideo){
+        [self.changeWorkModeSegmentControl setSelectedSegmentIndex:1];
+    }else if (systemState.mode == DJICameraModePlayback){
+        [self.changeWorkModeSegmentControl setSelectedSegmentIndex:2];
     }
 }
 
--(void) droneOnConnectionStatusChanged:(DJIConnectionStatus)status
-{
-    if (status == ConnectionSucceeded) {
-        NSLog(@"Connection Succeeded");
-    }
-    else if(status == ConnectionStartConnect)
-    {
-        NSLog(@"Start Reconnect");
-    }
-    else if(status == ConnectionBroken)
-    {
-        NSLog(@"Connection Broken");
-    }
-    else if (status == ConnectionFailed)
-    {
-        NSLog(@"Connection Failed");
-    }
-}
-
--(void) camera:(DJICamera *)camera didUpdatePlaybackState:(DJICameraPlaybackState *)playbackState
+#pragma mark - DJIPlaybackDelegate
+- (void)playbackManager:(DJIPlaybackManager *)playbackManager didUpdatePlaybackState:(DJICameraPlaybackState *)playbackState
 {
     
-    if (self.cameraSystemState.workMode == CameraWorkModePlayback) {
+    if (self.cameraSystemState.mode == DJICameraModePlayback) {
         
         self.cameraPlaybackState = playbackState;
         [self updateUIWithPlaybackState:playbackState];
@@ -293,39 +308,40 @@
     {
         [self.playVideoBtn setHidden:YES];
     }
-    
+
 }
 
 - (void)updateUIWithPlaybackState:(DJICameraPlaybackState *)playbackState
 {
-    if (playbackState.playbackMode == SingleFilePreview) {
+    
+    if (playbackState.playbackMode == DJICameraPlaybackModeSingleFilePreview) {
         
         [self.selectBtn setHidden:YES];
         [self.selectAllBtn setHidden:YES];
         
-        if (playbackState.mediaFileType == MediaFileJPEG || playbackState.mediaFileType == MediaFileDNG) { //Photo Type
+        if (playbackState.mediaFileType == DJICameraPlaybackFileFormatJPEG || playbackState.mediaFileType == DJICameraPlaybackFileFormatRAWDNG) { //Photo Type
             
             [self.playVideoBtn setHidden:YES];
             
-        }else if (playbackState.mediaFileType == MediaFileVIDEO) //Video Type
+        }else if (playbackState.mediaFileType == DJICameraPlaybackFileFormatVIDEO) //Video Type
         {
             [self.playVideoBtn setHidden:NO];
         }
         
-    }else if (playbackState.playbackMode == SingleVideoPlaybackStart){ //Playing Video
+    }else if (playbackState.playbackMode == DJICameraPlaybackModeSingleVideoPlaybackStart){ //Playing Video
         
         [self.selectBtn setHidden:YES];
         [self.selectAllBtn setHidden:YES];
         [self.playVideoBtn setHidden:YES];
         
-    }else if (playbackState.playbackMode == MultipleFilesPreview){
+    }else if (playbackState.playbackMode == DJICameraPlaybackModeMultipleFilesPreview){
         
         [self.selectBtn setHidden:NO];
         [self.selectBtn setTitle:@"Select" forState:UIControlStateNormal];
         [self.selectAllBtn setHidden:NO];
         [self.playVideoBtn setHidden:YES];
         
-    }else if (playbackState.playbackMode == MultipleFilesEdit){
+    }else if (playbackState.playbackMode == DJICameraPlaybackModeMultipleFilesEdit){
     
         [self.selectBtn setHidden:NO];
         [self.selectBtn setTitle:@"Cancel" forState:UIControlStateNormal];
@@ -339,19 +355,21 @@
 #pragma mark UIAlertView Delegate Method
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    
+    __weak DJICamera* camera = [self fetchCamera];
+
     if (alertView.tag == kDeleteAllSelFileAlertTag) {
     
         if (buttonIndex == 1) {
-            [self.camera deleteAllSelectedFiles];
+            [camera.playbackManager deleteAllSelectedFiles];
             [self.selectBtn setTitle:@"Select" forState:UIControlStateNormal];
         }
         
     }else if (alertView.tag == kDeleteCurrentFileAlertTag){
     
         if (buttonIndex == 1) {
-            [self.camera deleteCurrentPreviewFile];
+            [camera.playbackManager deleteCurrentPreviewFile];
             [self.selectBtn setTitle:@"Select" forState:UIControlStateNormal];
-
         }
         
     }else if (alertView.tag == kDownloadAllSelFileAlertTag){
@@ -359,7 +377,9 @@
         if (buttonIndex == 1) {
             [self downloadFiles];
         }
+        
     }else if (alertView.tag == kDownloadCurrentFileAlertTag){
+        
         if (buttonIndex == 1) {
             [self downloadFiles];
         }
@@ -368,7 +388,6 @@
 }
 
 #pragma mark Download Files Method
-
 - (void)updateDownloadProgress:(NSTimer *)updatedTimer
 {
     
@@ -410,61 +429,69 @@
     self.currentDownloadSize = 0;
     self.downloadedFileCount = 0;
     
-    [self.downloadedImageData setData:nil];
+    [self.downloadedImageData setData:[NSData dataWithBytes:NULL length:0]];
     [self.downloadedImageArray removeAllObjects];
 }
 
 -(void) downloadFiles
 {
-    
     [self resetDownloadData];
     
-    if (self.cameraPlaybackState.playbackMode == SingleFilePreview) {
+    if (self.cameraPlaybackState.playbackMode == DJICameraPlaybackModeSingleFilePreview) {
         self.selectedFileCount = 1;
     }
 
     __weak DJIRootViewController *weakSelf = self;
+    __weak DJICamera *camera = [self fetchCamera];
     
-    [self.camera downloadAllSelectedFilesWithPreparingBlock:^(NSString *fileName, DJIDownloadFileType fileType, NSUInteger fileSize, BOOL *skip) {
-
+    [camera.playbackManager downloadSelectedFilesWithPreparation:^(NSString * _Nullable fileName, DJIDownloadFileType fileType, NSUInteger fileSize, BOOL * _Nonnull skip) {
+        
         [weakSelf startUpdateTimer];
         weakSelf.totalFileSize = (long)fileSize;
         weakSelf.targetFileName = fileName;
-
+        
         [weakSelf showStatusAlertView];
         NSString *title = [NSString stringWithFormat:@"Download (%d/%d)", weakSelf.downloadedFileCount + 1, self.selectedFileCount];
         NSString *message = [NSString stringWithFormat:@"FileName:%@, FileSize:%0.1fKB, Downloaded:0.0KB", fileName, weakSelf.totalFileSize / 1024.0];
         [weakSelf updateStatusAlertContentWithTitle:title message:message shouldDismissAfterDelay:NO];
         
-    } dataBlock:^(NSData *data, NSError *error) {
+    } process:^(NSData * _Nullable data, NSError * _Nullable error) {
+        
         /**
          *  Important: Don't update Download Progress UI here, it will slow down the download file speed.
          */
         
-        [weakSelf.downloadedImageData appendData:data];
-        weakSelf.currentDownloadSize += data.length;
+        if (data) {
+            [weakSelf.downloadedImageData appendData:data];
+            weakSelf.currentDownloadSize += data.length;
+        }
         weakSelf.downloadImageError = error;
-        
-    } completionBlock:^{
+
+    } fileCompletion:^{
         
         NSLog(@"Completed Download");
         weakSelf.downloadedFileCount++;
         
         UIImage *downloadImage = [[UIImage alloc] initWithData:self.downloadedImageData];
-        [weakSelf.downloadedImageArray addObject:downloadImage];
+        if (downloadImage) {
+            [weakSelf.downloadedImageArray addObject:downloadImage];
+        }
         
-        [weakSelf.downloadedImageData setData:nil]; //Reset DownloadedImageData when download one file finished
+        [weakSelf.downloadedImageData setData:[NSData dataWithBytes:NULL length:0]]; //Reset DownloadedImageData when download one file finished
         weakSelf.currentDownloadSize = 0.0f; //Reset currentDownloadSize when download one file finished
-
+        
         NSString *title = [NSString stringWithFormat:@"Download (%d/%d)", weakSelf.downloadedFileCount, weakSelf.selectedFileCount];
-        [weakSelf updateStatusAlertContentWithTitle:title message:@"Completed" shouldDismissAfterDelay:NO];
+        [weakSelf updateStatusAlertContentWithTitle:title message:@"Completed" shouldDismissAfterDelay:YES];
         
         if (weakSelf.downloadedFileCount == weakSelf.selectedFileCount) { //Downloaded all the selected files
             [weakSelf stopTimer];
             [weakSelf.selectBtn setTitle:@"Select" forState:UIControlStateNormal];
             [weakSelf saveDownloadImage];
         }
+
+    } overallCompletion:^(NSError * _Nullable error) {
         
+        NSLog(@"DownloadFiles Error %@", error.description);
     }];
     
 }
@@ -546,35 +573,41 @@
 - (IBAction)captureAction:(id)sender {
     
     __weak DJIRootViewController *weakSelf = self;
-    [self.camera startTakePhoto:CameraSingleCapture withResult:^(DJIError *error) {
-        if (error.errorCode != ERR_Succeeded) {
-            UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Take Photo Error" message:error.errorDescription delegate:weakSelf cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    __weak DJICamera *camera = [self fetchCamera];
+    
+    [camera startShootPhoto:DJICameraShootPhotoModeSingle withCompletion:^(NSError * _Nullable error) {
+        
+        if (error) {
+            UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Take Photo Error" message:error.description delegate:weakSelf cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [errorAlert show];
-            
         }
+
     }];
+
 }
 
 - (IBAction)recordAction:(id)sender {
     
     __weak DJIRootViewController *weakSelf = self;
-    
+    __weak DJICamera *camera = [self fetchCamera];
+
     if (self.isRecording) {
         
-        [self.camera stopRecord:^(DJIError *error) {
-            
-            if (error.errorCode != ERR_Succeeded) {
-                UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Stop Record Error" message:error.errorDescription delegate:weakSelf cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [camera stopRecordVideoWithCompletion:^(NSError * _Nullable error) {
+           
+            if (error) {
+                UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Stop Record Error" message:error.description delegate:weakSelf cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [errorAlert show];
             }
+
         }];
         
     }else
     {
-        [self.camera startRecord:^(DJIError *error) {
+        [camera startRecordVideoWithCompletion:^(NSError * _Nullable error) {
             
-            if (error.errorCode != ERR_Succeeded) {
-                UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Start Record Error" message:error.errorDescription delegate:weakSelf cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            if (error) {
+                UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Start Record Error" message:error.description delegate:weakSelf cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [errorAlert show];
             }
         }];
@@ -585,16 +618,16 @@
 
 - (IBAction)changeWorkModeAction:(id)sender {
     
-    DJIInspireCamera* inspireCamera = (DJIInspireCamera*)self.camera;
     __weak DJIRootViewController *weakSelf = self;
-    
+    __weak DJICamera *camera = [self fetchCamera];
+
     UISegmentedControl *segmentControl = (UISegmentedControl *)sender;
     if (segmentControl.selectedSegmentIndex == 0) { //CaptureMode
         
-        [inspireCamera setCameraWorkMode:CameraWorkModeCapture withResult:^(DJIError *error) {
-            
-            if (error.errorCode != ERR_Succeeded) {
-                UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Set CameraWorkModeCapture Failed" message:error.errorDescription delegate:weakSelf cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [camera setCameraMode:DJICameraModeShootPhoto withCompletion:^(NSError * _Nullable error) {
+           
+            if (error) {
+                UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Set CameraWorkModeCapture Failed" message:error.description delegate:weakSelf cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [errorAlert show];
             }
             
@@ -602,24 +635,24 @@
         
     }else if (segmentControl.selectedSegmentIndex == 1){ //RecordMode
         
-        [inspireCamera setCameraWorkMode:CameraWorkModeRecord withResult:^(DJIError *error) {
-            
-            if (error.errorCode != ERR_Succeeded) {
-                UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Set CameraWorkModeRecord Failed" message:error.errorDescription delegate:weakSelf cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [camera setCameraMode:DJICameraModeRecordVideo withCompletion:^(NSError * _Nullable error) {
+           
+            if (error) {
+                UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Set CameraWorkModeRecord Failed" message:error.description delegate:weakSelf cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [errorAlert show];
             }
-            
+
         }];
         
     }else if (segmentControl.selectedSegmentIndex == 2){  //PlaybackMode
         
-        [inspireCamera setCameraWorkMode:CameraWorkModePlayback withResult:^(DJIError *error) {
+        [camera setCameraMode:DJICameraModePlayback withCompletion:^(NSError * _Nullable error) {
             
-            if (error.errorCode != ERR_Succeeded) {
-                UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Set CameraWorkModeRecord Failed" message:error.errorDescription delegate:weakSelf cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            if (error) {
+                UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Set CameraWorkModePlayback Failed" message:error.description delegate:weakSelf cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [errorAlert show];
             }
-            
+
         }];
         
     }
@@ -627,40 +660,49 @@
 }
 
 - (IBAction)multiPreviewButtonClicked:(id)sender {
-    [self.camera enterMultiplePreviewMode];
+    
+    __weak DJICamera *camera = [self fetchCamera];
+    [camera.playbackManager enterMultiplePreviewMode];
+    
 }
 
 - (IBAction)playVideoBtnAction:(id)sender {
-    if (self.cameraPlaybackState.mediaFileType == MediaFileVIDEO) {
-        [self.camera startVideoPlayback];
+    
+    __weak DJICamera *camera = [self fetchCamera];
+    if (self.cameraPlaybackState.mediaFileType == DJICameraPlaybackFileFormatVIDEO) {
+        [camera.playbackManager startVideoPlayback];
     }
+    
 }
 
 - (IBAction)stopVideoBtnAction:(id)sender {
     
-    if (self.cameraPlaybackState.mediaFileType == MediaFileVIDEO) {
+    __weak DJICamera *camera = [self fetchCamera];
+    if (self.cameraPlaybackState.mediaFileType == DJICameraPlaybackFileFormatVIDEO) {
         if (self.cameraPlaybackState.videoPlayProgress > 0) {
-            [self.camera stopVideoPlayback];
+            [camera.playbackManager stopVideoPlayback];
         }
     }
+    
 }
 
 - (IBAction)selectButtonAction:(id)sender {
     
-    if (self.cameraPlaybackState.playbackMode == MultipleFilesEdit) {
-        [self.camera exitMultipleEditMode];
+    __weak DJICamera *camera = [self fetchCamera];
+    if (self.cameraPlaybackState.playbackMode == DJICameraPlaybackModeMultipleFilesEdit) {
+        [camera.playbackManager exitMultipleEditMode];
     }else
     {
-        [self.camera enterMultipleEditMode];
+        [camera.playbackManager enterMultipleEditMode];
     }
 
 }
 
 - (IBAction)deleteButtonAction:(id)sender {
     
-    self.selectedFileCount = self.cameraPlaybackState.numbersOfSelected;
+    self.selectedFileCount = self.cameraPlaybackState.numberOfSelectedFiles;
     
-    if (self.cameraPlaybackState.playbackMode == MultipleFilesEdit) {
+    if (self.cameraPlaybackState.playbackMode == DJICameraPlaybackModeMultipleFilesEdit) {
 
         if (self.selectedFileCount == 0) {
             [self showStatusAlertView];
@@ -680,7 +722,7 @@
             [deleteAllSelFilesAlert show];
         }
 
-    }else if (self.cameraPlaybackState.playbackMode == SingleFilePreview){
+    }else if (self.cameraPlaybackState.playbackMode == DJICameraPlaybackModeSingleFilePreview){
         
         UIAlertView *deleteCurrentFileAlert = [[UIAlertView alloc] initWithTitle:@"Delete The Current File?" message:@"" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
         deleteCurrentFileAlert.tag = kDeleteCurrentFileAlertTag;
@@ -692,9 +734,9 @@
 
 - (IBAction)downloadButtonAction:(id)sender {
     
-    self.selectedFileCount = self.cameraPlaybackState.numbersOfSelected;
+    self.selectedFileCount = self.cameraPlaybackState.numberOfSelectedFiles;
     
-    if (self.cameraPlaybackState.playbackMode == MultipleFilesEdit) {
+    if (self.cameraPlaybackState.playbackMode == DJICameraPlaybackModeMultipleFilesEdit) {
         
         if (self.selectedFileCount == 0) {
             [self showStatusAlertView];
@@ -714,7 +756,7 @@
             [downloadSelFileAlert show];
         }
         
-    }else if (self.cameraPlaybackState.playbackMode == SingleFilePreview){
+    }else if (self.cameraPlaybackState.playbackMode == DJICameraPlaybackModeSingleFilePreview){
         
         UIAlertView *downloadCurrentFileAlert = [[UIAlertView alloc] initWithTitle:@"Download The Current File?" message:@"" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
         downloadCurrentFileAlert.tag = kDownloadCurrentFileAlertTag;
@@ -726,12 +768,14 @@
 
 - (IBAction)selectAllBtnAction:(id)sender {
     
+    __weak DJICamera *camera = [self fetchCamera];
+
     if (self.cameraPlaybackState.isAllFilesInPageSelected) {
-        [self.camera unselectAllFilesInPage];
+        [camera.playbackManager unselectAllFilesInPage];
     }
     else
     {
-        [self.camera selectAllFilesInPage];
+        [camera.playbackManager selectAllFilesInPage];
     }
 
 }

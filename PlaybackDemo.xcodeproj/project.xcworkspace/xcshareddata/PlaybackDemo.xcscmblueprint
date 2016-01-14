@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "CA0F59FFC87979DCD39D9C793907572D68C6ECE3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F242303504B8CDD3CE213C5B3FFB052B596793AF" : 0,
+    "CA0F59FFC87979DCD39D9C793907572D68C6ECE3" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9F430010-4959-4DE4-9BC7-78E178D4A89B",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F242303504B8CDD3CE213C5B3FFB052B596793AF" : "",
+    "CA0F59FFC87979DCD39D9C793907572D68C6ECE3" : "iOS-PlaybackDemo\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PlaybackDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PlaybackDemo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:DJI-Mobile-SDK\/iOS-PlaybackDemo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CA0F59FFC87979DCD39D9C793907572D68C6ECE3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/oliver.ou@us003.fly-access.com\/scm\/msdk\/documentation.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F242303504B8CDD3CE213C5B3FFB052B596793AF"
+    }
+  ]
+}

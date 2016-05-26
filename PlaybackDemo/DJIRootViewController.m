@@ -8,7 +8,7 @@
 
 #import "DJIRootViewController.h"
 #import <DJISDK/DJISDK.h>
-#import "VideoPreviewer.h"
+#import <VideoPreviewer/VideoPreviewer.h>
 #import "DJIPlaybackMultiSelectViewController.h"
 
 #define kDeleteAllSelFileAlertTag 100
@@ -27,7 +27,7 @@
 #define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
 #define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
-@interface DJIRootViewController ()<DJICameraDelegate, DJISDKManagerDelegate, DJIPlaybackDelegate>
+@interface DJIRootViewController ()<DJICameraDelegate, DJISDKManagerDelegate, DJIPlaybackDelegate, DJIBaseProductDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *recordBtn;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *changeWorkModeSegmentControl;
@@ -142,7 +142,7 @@
 
 - (void)registerApp
 {
-    NSString *appKey = @"Enter Your App Key Here";
+    NSString *appKey = @"Please enter your App Key here";
     [DJISDKManager registerApp:appKey withDelegate:self];
 }
 
@@ -158,9 +158,14 @@
 
 -(void) sdkManagerProductDidChangeFrom:(DJIBaseProduct* _Nullable) oldProduct to:(DJIBaseProduct* _Nullable) newProduct
 {
-    __weak DJICamera* camera = [self fetchCamera];
-    [camera setDelegate:self];
-    [camera.playbackManager setDelegate:self];
+    if (newProduct) {
+        [newProduct setDelegate:self];
+        DJICamera* camera = [self fetchCamera];
+        if (camera != nil) {
+            camera.delegate = self;
+            camera.playbackManager.delegate = self;
+        }
+    }
 
 }
 
@@ -258,9 +263,7 @@
 #pragma mark - DJICameraDelegate
 - (void)camera:(DJICamera *)camera didReceiveVideoData:(uint8_t *)videoBuffer length:(size_t)size
 {
-    uint8_t* pBuffer = (uint8_t*)malloc(size);
-    memcpy(pBuffer, videoBuffer, size);
-    [[VideoPreviewer instance].dataQueue push:pBuffer length:(int)size];
+    [[VideoPreviewer instance] push:videoBuffer length:(int)size];
 }
 
 - (void)camera:(DJICamera *)camera didUpdateSystemState:(DJICameraSystemState *)systemState

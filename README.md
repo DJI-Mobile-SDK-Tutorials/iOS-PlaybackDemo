@@ -2,7 +2,7 @@
 
 <!-- toc -->
 
-*If you come across any mistakes or bugs in this tutorial, please let us know using a Github issue, a post on the DJI forum, or commenting in the Gitbook. Please feel free to send us Github pull request and help us fix any issues. However, all pull requests related to document must follow the [document style](https://github.com/dji-sdk/Mobile-SDK-Tutorial/issues/19)*
+*If you come across any mistakes or bugs in this tutorial, please let us know using a Github issue, a post on the DJI forum. Please feel free to send us Github pull request and help us fix any issues. However, all pull requests related to document must follow the [document style](https://github.com/dji-sdk/Mobile-SDK-Tutorial/issues/19)*
 
 ---
 
@@ -10,17 +10,32 @@ In this tutorial, you will learn how to use DJI Mobile SDK to access the media r
 
 In order for our app to manage photos and videos, however, it must first be able to take and record them. Fortunately, in our previous tutorial [Creating a Camera Application](https://github.com/DJI-Mobile-SDK/iOS-FPVDemo) we show you how to implement **Capture** and **Record** functions. Make sure you have read through that tutorial first before embarking on this one.
 
-You can download the demo project from this **Github Page**. If you want to have a better reading experience, please check our [Gitbook Version](http://dji-dev.gitbooks.io/mobile-sdk-tutorials/content/en/iOS/PlaybackDemo/P3X&Inspire1/PlaybackDemo_en.html)
+You can download the demo project from this **Github Page**.
 
 Let's get started!
 
 ## Previewing Photos and Videos
 
-### 1. Importing the Framework and Libraries
+### 1. Importing the SDK
 
-  Create a new project in Xcode and name it "**PlaybackDemo**", copy the **DJISDK.framework** into your Xcode project's folder. Next, find the "VideoPreviewer" folder in the downloaded SDK. Copy the entire "VideoPreviewer" folder into your Xcode project's "ThirdParty" folder. Set the **Header Search Paths** and **Library Search Paths** for **FFMPEG** in the **Build Settings**. If this is a bit confusing, just check our previous tutorial [**Creating a Camera Application**](https://github.com/DJI-Mobile-SDK/iOS-FPVDemo) for further explanation. Then, select the project target and go to Build Phases -> Link Binary With Libraries. Click the "+" button at the bottom and add two libraries to your project: **libstdc++.6.0.9.tbd** and **libz.tbd**. Take a look at the screenshot below:
+Now, let's create a new project in Xcode, choose **Single View Application** template for your project and press "Next", then enter "PlaybackDemo" in the **Product Name** field and keep the other default settings.
 
-  ![navigator](./Images/navigator.png)
+Once the project is created, let's import the **DJISDK.framework** to it. If you are not familiar with the process of importing and activating DJI SDK, please check this tutorial: [Importing and Activating DJI SDK in Xcode Project](https://github.com/DJI-Mobile-SDK/iOS-ImportAndActivateSDKInXcode) for details.
+  
+### 2. Importing the VideoPreviewer
+
+ **1**. We use the **FFMPEG** decoding library (found at <a href="http://ffmpeg.org" target="_blank">http://ffmpeg.org</a>) to do software video decoding here. For the hardware video decoding, we provide a **DJIH264Decoder** decoding library. You can find them in the **VideoPreviewer** folder, which you can download it from [DJI iOS SDK Github Repository](https://github.com/dji-sdk/Mobile-SDK-iOS/tree/master/Sample%20Code/VideoPreviewer). Download and copy the entire **VideoPreviewer** folder to your Xcode project's "Frameworks" folder and then add the "VideoPreviewer.xcodeproj" to the "Frameworks" folder in Xcode project navigator, as shown below:
+  
+ ![projectNavigator](./Images/projectNavigator.png)
+ 
+> Note: Please Make sure the **VideoPreviewer** folder and **DJISDK.framework** are in the same **Frameworks** folder like this:
+> 
+> ![frameworksFolderStruct](./Images/frameworksFolderStruct.png)
+ 
+ **2**. Next, let's select the "FPVDemo" target and open the "General" tab. In the "Embedded Binaries" section, press "+" button to add the "VideoPreviewer.framework" as shown below:
+ 
+  ![addFrameworks](./Images/addFrameworks.png)
+  ![addFrameworksResult](./Images/addFrameworksResult.png)
   
 ### 2. Switching Playback Modes
 
@@ -38,9 +53,9 @@ Then, add a UIView inside the **Root View Controller** and set it as an IBOutlet
 ~~~objc
 #import "DJIRootViewController.h"
 #import <DJISDK/DJISDK.h>
-#import "VideoPreviewer.h"
+#import <VideoPreviewer/VideoPreviewer.h>
 
-@interface DJIRootViewController ()<DJICameraDelegate, DJISDKManagerDelegate>
+@interface DJIRootViewController ()<DJICameraDelegate, DJISDKManagerDelegate, DJIPlaybackDelegate, DJIBaseProductDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *recordBtn;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *changeWorkModeSegmentControl;
 @property (weak, nonatomic) IBOutlet UIView *fpvPreviewView;
@@ -130,9 +145,14 @@ Also, implement the DJISDKManagerDelegate methods to do initial setup after regi
 
 -(void) sdkManagerProductDidChangeFrom:(DJIBaseProduct* _Nullable) oldProduct to:(DJIBaseProduct* _Nullable) newProduct
 {
-    __weak DJICamera* camera = [self fetchCamera];
-    [camera setDelegate:self];
-    [camera.playbackManager setDelegate:self];
+    if (newProduct) {
+        [newProduct setDelegate:self];
+        DJICamera* camera = [self fetchCamera];
+        if (camera != nil) {
+            camera.delegate = self;
+            camera.playbackManager.delegate = self;
+        }
+    }
 }
 
 ~~~
@@ -155,9 +175,7 @@ Also, implement the DJISDKManagerDelegate methods to do initial setup after regi
 #pragma mark - DJICameraDelegate
 - (void)camera:(DJICamera *)camera didReceiveVideoData:(uint8_t *)videoBuffer length:(size_t)size
 {
-    uint8_t* pBuffer = (uint8_t*)malloc(size);
-    memcpy(pBuffer, videoBuffer, size);
-    [[VideoPreviewer instance].dataQueue push:pBuffer length:(int)size];
+    [[VideoPreviewer instance] push:videoBuffer length:(int)size];
 }
 
 - (void)camera:(DJICamera *)camera didUpdateSystemState:(DJICameraSystemState *)systemState

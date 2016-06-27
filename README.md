@@ -1,3 +1,5 @@
+#### This tutorial is now deprecated, please refer to <https://developer.dji.com/mobile-sdk/documentation/ios-tutorials/PlaybackDemo.html> in DJI Developer Website.
+
 # Creating a Photo and Video Playback Application
 
 <!-- toc -->

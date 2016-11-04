@@ -24,8 +24,9 @@
 #define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
 #define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
 
-#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
-#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 667)
+#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 568)
+
 
 @interface DJIRootViewController ()<DJICameraDelegate, DJISDKManagerDelegate, DJIPlaybackDelegate, DJIBaseProductDelegate>
 
@@ -142,7 +143,7 @@
 
 - (void)registerApp
 {
-    NSString *appKey = @"Please enter your App Key here";
+    NSString *appKey = @"Please enter your App Key here.";
     [DJISDKManager registerApp:appKey withDelegate:self];
 }
 
@@ -194,16 +195,19 @@
 - (void)initPlaybackMultiSelectVC
 {
     
+    NSLog(@"Width: %f, Height: %f", SCREEN_WIDTH, SCREEN_HEIGHT);
+    
     if (IS_IPAD) {
+        
         self.playbackMultiSelectVC = [[DJIPlaybackMultiSelectViewController alloc] initWithNibName:@"DJIPlaybackMultiSelectViewController_iPad" bundle:[NSBundle mainBundle]];
 
-    }else if (IS_IPHONE){
+    }else if (IS_IPHONE_6){
+
+        self.playbackMultiSelectVC = [[DJIPlaybackMultiSelectViewController alloc] initWithNibName:@"DJIPlaybackMultiSelectViewController_iPhone6" bundle:[NSBundle mainBundle]];
         
-        if (IS_IPHONE_6) {
-            self.playbackMultiSelectVC = [[DJIPlaybackMultiSelectViewController alloc] initWithNibName:@"DJIPlaybackMultiSelectViewController_iPhone6" bundle:[NSBundle mainBundle]];
-        }else if (IS_IPHONE_6P){
-            self.playbackMultiSelectVC = [[DJIPlaybackMultiSelectViewController alloc] initWithNibName:@"DJIPlaybackMultiSelectViewController_iPhone6+" bundle:[NSBundle mainBundle]];
-        }
+    }else if (IS_IPHONE_6P){
+    
+        self.playbackMultiSelectVC = [[DJIPlaybackMultiSelectViewController alloc] initWithNibName:@"DJIPlaybackMultiSelectViewController_iPhone6+" bundle:[NSBundle mainBundle]];
     }
     
     [self.playbackMultiSelectVC.view setFrame:self.view.frame];

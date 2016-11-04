@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A41940AB1DCB77690076478C /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A41940AA1DCB77510076478C /* VideoPreviewer.framework */; };
+		A41940AC1DCB77690076478C /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A41940AA1DCB77510076478C /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A451C9201B94C4170065AEF1 /* DJIPlaybackMultiSelectViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A451C91D1B94C4170065AEF1 /* DJIPlaybackMultiSelectViewController_iPad.xib */; };
 		A451C9211B94C4170065AEF1 /* DJIPlaybackMultiSelectViewController_iPhone6+.xib in Resources */ = {isa = PBXBuildFile; fileRef = A451C91E1B94C4170065AEF1 /* DJIPlaybackMultiSelectViewController_iPhone6+.xib */; };
 		A451C9241B94D1D20065AEF1 /* DJIPlaybackMultiSelectViewController_iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = A451C9231B94D1D20065AEF1 /* DJIPlaybackMultiSelectViewController_iPhone6.xib */; };
-		A45FC1131CF69E9B0033ED66 /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45FC1121CF69E530033ED66 /* VideoPreviewer.framework */; };
-		A45FC1141CF69E9B0033ED66 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A45FC1121CF69E530033ED66 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A45FC1261CF6B02C0033ED66 /* DJISDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A45FC1241CF6B0280033ED66 /* DJISDK.framework */; };
-		A45FC1271CF6B02C0033ED66 /* DJISDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A45FC1241CF6B0280033ED66 /* DJISDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A4EBD7E61B6069970098E5BC /* DJIPlaybackMultiSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EBD7E51B6069970098E5BC /* DJIPlaybackMultiSelectViewController.m */; };
 		A4EFEC721B5CDB40000726DE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EFEC711B5CDB40000726DE /* main.m */; };
 		A4EFEC751B5CDB40000726DE /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4EFEC741B5CDB40000726DE /* AppDelegate.mm */; };
@@ -22,19 +20,20 @@
 		A4EFEC7D1B5CDB40000726DE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4EFEC7C1B5CDB40000726DE /* Images.xcassets */; };
 		A4EFEC801B5CDB40000726DE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4EFEC7E1B5CDB40000726DE /* LaunchScreen.xib */; };
 		A4EFEC8C1B5CDB40000726DE /* PlaybackDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EFEC8B1B5CDB40000726DE /* PlaybackDemoTests.m */; };
+		C8F73DDBDF6A8119F1D6350E /* libPods-PlaybackDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F350F08C1F21BD28C40843 /* libPods-PlaybackDemo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A45FC1111CF69E530033ED66 /* PBXContainerItemProxy */ = {
+		A41940A91DCB77510076478C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A45FC10D1CF69E530033ED66 /* VideoPreviewer.xcodeproj */;
+			containerPortal = A41940A51DCB77510076478C /* VideoPreviewer.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 02A543FD1C3C51CB0083C11B;
 			remoteInfo = VideoPreviewer;
 		};
-		A45FC1151CF69E9B0033ED66 /* PBXContainerItemProxy */ = {
+		A41940AD1DCB77690076478C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A45FC10D1CF69E530033ED66 /* VideoPreviewer.xcodeproj */;
+			containerPortal = A41940A51DCB77510076478C /* VideoPreviewer.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 02A543FC1C3C51CB0083C11B;
 			remoteInfo = VideoPreviewer;
@@ -55,8 +54,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A45FC1141CF69E9B0033ED66 /* VideoPreviewer.framework in Embed Frameworks */,
-				A45FC1271CF6B02C0033ED66 /* DJISDK.framework in Embed Frameworks */,
+				A41940AC1DCB77690076478C /* VideoPreviewer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,11 +62,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		53A6B3387BB85367AF8906CC /* Pods-PlaybackDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaybackDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlaybackDemo/Pods-PlaybackDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		9D5A2AF96B5DFBEA7E6080D7 /* Pods-PlaybackDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaybackDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlaybackDemo/Pods-PlaybackDemo.release.xcconfig"; sourceTree = "<group>"; };
+		A41940A51DCB77510076478C /* VideoPreviewer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VideoPreviewer.xcodeproj; path = VideoPreviewer/VideoPreviewer.xcodeproj; sourceTree = "<group>"; };
+		A41940B01DCB7F0A0076478C /* PlaybackDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PlaybackDemo.entitlements; sourceTree = "<group>"; };
 		A451C91D1B94C4170065AEF1 /* DJIPlaybackMultiSelectViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJIPlaybackMultiSelectViewController_iPad.xib; sourceTree = "<group>"; };
 		A451C91E1B94C4170065AEF1 /* DJIPlaybackMultiSelectViewController_iPhone6+.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DJIPlaybackMultiSelectViewController_iPhone6+.xib"; sourceTree = "<group>"; };
 		A451C9231B94D1D20065AEF1 /* DJIPlaybackMultiSelectViewController_iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJIPlaybackMultiSelectViewController_iPhone6.xib; sourceTree = "<group>"; };
-		A45FC10D1CF69E530033ED66 /* VideoPreviewer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VideoPreviewer.xcodeproj; path = PlaybackDemo/Frameworks/VideoPreviewer/VideoPreviewer.xcodeproj; sourceTree = "<group>"; };
-		A45FC1241CF6B0280033ED66 /* DJISDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DJISDK.framework; path = PlaybackDemo/Frameworks/DJISDK.framework; sourceTree = "<group>"; };
 		A4EBD7E41B6069970098E5BC /* DJIPlaybackMultiSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJIPlaybackMultiSelectViewController.h; sourceTree = "<group>"; };
 		A4EBD7E51B6069970098E5BC /* DJIPlaybackMultiSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJIPlaybackMultiSelectViewController.m; sourceTree = "<group>"; };
 		A4EFEC6C1B5CDB40000726DE /* PlaybackDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlaybackDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +84,7 @@
 		A4EFEC851B5CDB40000726DE /* PlaybackDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaybackDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4EFEC8A1B5CDB40000726DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4EFEC8B1B5CDB40000726DE /* PlaybackDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaybackDemoTests.m; sourceTree = "<group>"; };
+		C2F350F08C1F21BD28C40843 /* libPods-PlaybackDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlaybackDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,8 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A45FC1261CF6B02C0033ED66 /* DJISDK.framework in Frameworks */,
-				A45FC1131CF69E9B0033ED66 /* VideoPreviewer.framework in Frameworks */,
+				A41940AB1DCB77690076478C /* VideoPreviewer.framework in Frameworks */,
+				C8F73DDBDF6A8119F1D6350E /* libPods-PlaybackDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,22 +107,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		58E0CE09CEBD10416D596A96 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				53A6B3387BB85367AF8906CC /* Pods-PlaybackDemo.debug.xcconfig */,
+				9D5A2AF96B5DFBEA7E6080D7 /* Pods-PlaybackDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A41940A61DCB77510076478C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A41940AA1DCB77510076478C /* VideoPreviewer.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A451C91C1B94C4170065AEF1 /* xibs */ = {
 			isa = PBXGroup;
 			children = (
-				A451C9231B94D1D20065AEF1 /* DJIPlaybackMultiSelectViewController_iPhone6.xib */,
 				A451C91D1B94C4170065AEF1 /* DJIPlaybackMultiSelectViewController_iPad.xib */,
+				A451C9231B94D1D20065AEF1 /* DJIPlaybackMultiSelectViewController_iPhone6.xib */,
 				A451C91E1B94C4170065AEF1 /* DJIPlaybackMultiSelectViewController_iPhone6+.xib */,
 			);
 			path = xibs;
-			sourceTree = "<group>";
-		};
-		A45FC10E1CF69E530033ED66 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A45FC1121CF69E530033ED66 /* VideoPreviewer.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		A4EFEC631B5CDB40000726DE = {
@@ -131,6 +141,7 @@
 				A4EFECAB1B5D3F94000726DE /* Frameworks */,
 				A4EFEC881B5CDB40000726DE /* PlaybackDemoTests */,
 				A4EFEC6D1B5CDB40000726DE /* Products */,
+				58E0CE09CEBD10416D596A96 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -146,6 +157,7 @@
 		A4EFEC6E1B5CDB40000726DE /* PlaybackDemo */ = {
 			isa = PBXGroup;
 			children = (
+				A41940B01DCB7F0A0076478C /* PlaybackDemo.entitlements */,
 				A4EFEC731B5CDB40000726DE /* AppDelegate.h */,
 				A4EFEC741B5CDB40000726DE /* AppDelegate.mm */,
 				A4EFEC761B5CDB40000726DE /* DJIRootViewController.h */,
@@ -190,8 +202,8 @@
 		A4EFECAB1B5D3F94000726DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A45FC1241CF6B0280033ED66 /* DJISDK.framework */,
-				A45FC10D1CF69E530033ED66 /* VideoPreviewer.xcodeproj */,
+				A41940A51DCB77510076478C /* VideoPreviewer.xcodeproj */,
+				C2F350F08C1F21BD28C40843 /* libPods-PlaybackDemo.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -203,15 +215,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A4EFEC8F1B5CDB40000726DE /* Build configuration list for PBXNativeTarget "PlaybackDemo" */;
 			buildPhases = (
+				AEDD7ADC09803CC1CE2254DB /* [CP] Check Pods Manifest.lock */,
 				A4EFEC681B5CDB40000726DE /* Sources */,
 				A4EFEC691B5CDB40000726DE /* Frameworks */,
 				A4EFEC6A1B5CDB40000726DE /* Resources */,
 				A45283C11C4688CD0081E06D /* Embed Frameworks */,
+				76820D4518DBBC12BDCF02AA /* [CP] Embed Pods Frameworks */,
+				38823F021D1F08634929191A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A45FC1161CF69E9B0033ED66 /* PBXTargetDependency */,
+				A41940AE1DCB77690076478C /* PBXTargetDependency */,
 			);
 			name = PlaybackDemo;
 			productName = PlaybackDemo;
@@ -247,6 +262,11 @@
 				TargetAttributes = {
 					A4EFEC6B1B5CDB40000726DE = {
 						CreatedOnToolsVersion = 6.3;
+						SystemCapabilities = {
+							com.apple.DataProtection = {
+								enabled = 0;
+							};
+						};
 					};
 					A4EFEC841B5CDB40000726DE = {
 						CreatedOnToolsVersion = 6.3;
@@ -267,8 +287,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = A45FC10E1CF69E530033ED66 /* Products */;
-					ProjectRef = A45FC10D1CF69E530033ED66 /* VideoPreviewer.xcodeproj */;
+					ProductGroup = A41940A61DCB77510076478C /* Products */;
+					ProjectRef = A41940A51DCB77510076478C /* VideoPreviewer.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -280,11 +300,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A45FC1121CF69E530033ED66 /* VideoPreviewer.framework */ = {
+		A41940AA1DCB77510076478C /* VideoPreviewer.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = VideoPreviewer.framework;
-			remoteRef = A45FC1111CF69E530033ED66 /* PBXContainerItemProxy */;
+			remoteRef = A41940A91DCB77510076478C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -312,6 +332,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		38823F021D1F08634929191A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlaybackDemo/Pods-PlaybackDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76820D4518DBBC12BDCF02AA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PlaybackDemo/Pods-PlaybackDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AEDD7ADC09803CC1CE2254DB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A4EFEC681B5CDB40000726DE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -335,10 +403,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A45FC1161CF69E9B0033ED66 /* PBXTargetDependency */ = {
+		A41940AE1DCB77690076478C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = VideoPreviewer;
-			targetProxy = A45FC1151CF69E9B0033ED66 /* PBXContainerItemProxy */;
+			targetProxy = A41940AD1DCB77690076478C /* PBXContainerItemProxy */;
 		};
 		A4EFEC871B5CDB40000726DE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -451,14 +519,14 @@
 		};
 		A4EFEC901B5CDB40000726DE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A6B3387BB85367AF8906CC /* Pods-PlaybackDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/PlaybackDemo",
-					"$(PROJECT_DIR)/PlaybackDemo/Frameworks",
+					"$(PROJECT_DIR)/../VideoPreviewer",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -483,14 +551,14 @@
 		};
 		A4EFEC911B5CDB40000726DE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D5A2AF96B5DFBEA7E6080D7 /* Pods-PlaybackDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/PlaybackDemo",
-					"$(PROJECT_DIR)/PlaybackDemo/Frameworks",
+					"$(PROJECT_DIR)/../VideoPreviewer",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -517,6 +585,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -536,6 +605,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

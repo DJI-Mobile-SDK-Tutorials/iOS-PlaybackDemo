@@ -60,6 +60,8 @@ installed.
  - Phantom 3 4K
  - Phantom 3 Advanced
  - Mavic Pro
+ - Phantom 4 Pro
+ - Inspire 2
 
 ## Tutorial
 

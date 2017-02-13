@@ -583,16 +583,12 @@
     __weak DJICamera *camera = [self fetchCamera];
     if (camera) {
         WeakRef(target);
-        [camera setShootPhotoMode:DJICameraShootPhotoModeSingle withCompletion:^(NSError * _Nullable error) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [camera startShootPhotoWithCompletion:^(NSError * _Nullable error) {
-                    WeakReturn(target);
-                    if (error) {
-                        UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Take Photo Error" message:error.description delegate:target cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                        [errorAlert show];
-                    }
-                }];
-            });
+        [camera startShootPhotoWithCompletion:^(NSError * _Nullable error) {
+            WeakReturn(target);
+            if (error) {
+                UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Take Photo Error" message:error.description delegate:target cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [errorAlert show];
+            }
         }];
     }
     

@@ -31,7 +31,7 @@
 #define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 568)
 
 
-@interface DJIRootViewController ()<DJICameraDelegate, DJISDKManagerDelegate, DJIPlaybackDelegate, DJIBaseProductDelegate>
+@interface DJIRootViewController ()<DJICameraDelegate, DJISDKManagerDelegate, DJIPlaybackDelegate, DJIBaseProductDelegate, DJIVideoFeedListener>
 
 @property (weak, nonatomic) IBOutlet UIButton *recordBtn;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *changeWorkModeSegmentControl;
@@ -123,7 +123,8 @@
 #pragma mark Custom Methods
 
 - (void)cleanVideoPreview {
-    [[VideoPreviewer instance] unSetView];
+    [[VideoPreviewer instance] setView:nil];
+    [[DJISDKManager videoFeeder].primaryVideoFeed removeListener:self];
     
     if (self.fpvPreviewView != nil) {
         [self.fpvPreviewView removeFromSuperview];
@@ -146,8 +147,7 @@
 
 - (void)registerApp
 {
-    NSString *appKey = @"Please enter your App Key here.";
-    [DJISDKManager registerApp:appKey withDelegate:self];
+    [DJISDKManager registerAppWithDelegate:self];
 }
 
 - (void)showAlertViewWithTitle:(NSString *)title withMessage:(NSString *)message
@@ -158,22 +158,22 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-#pragma mark DJISDKManagerDelegate Method
-
--(void) sdkManagerProductDidChangeFrom:(DJIBaseProduct* _Nullable) oldProduct to:(DJIBaseProduct* _Nullable) newProduct
+#pragma mark DJIBaseProductDelegate Method
+- (void)productConnected:(DJIBaseProduct *)product
 {
-    if (newProduct) {
-        [newProduct setDelegate:self];
+    if (product) {
+        [product setDelegate:self];
         DJICamera* camera = [self fetchCamera];
         if (camera != nil) {
             camera.delegate = self;
             camera.playbackManager.delegate = self;
         }
     }
-
 }
 
-- (void)sdkManagerDidRegisterAppWithError:(NSError *)error
+#pragma mark DJISDKManagerDelegate Method
+
+- (void)appRegisteredWithError:(NSError *)error
 {
     NSString* message = @"Register App Successed!";
     if (error) {
@@ -183,6 +183,7 @@
     {
         NSLog(@"registerAppSuccess");
         [DJISDKManager startConnectionToProduct];
+        [[DJISDKManager videoFeeder].primaryVideoFeed addListener:self withQueue:nil];
         [[VideoPreviewer instance] start];
     }
     
@@ -257,7 +258,7 @@
 
 }
 
-- (NSString *)formattingSeconds:(int)seconds
+- (NSString *)formattingSeconds:(NSUInteger)seconds
 {
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:seconds];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -268,11 +269,12 @@
     return formattedTimeString;
 }
 
-#pragma mark - DJICameraDelegate
-- (void)camera:(DJICamera *)camera didReceiveVideoData:(uint8_t *)videoBuffer length:(size_t)size
-{
-    [[VideoPreviewer instance] push:videoBuffer length:(int)size];
+#pragma mark - DJIVideoFeedListener
+-(void)videoFeed:(DJIVideoFeed *)videoFeed didUpdateVideoData:(NSData *)videoData {
+    [[VideoPreviewer instance] push:(uint8_t *)videoData.bytes length:(int)videoData.length];
 }
+
+#pragma mark - DJICameraDelegate
 
 - (void)camera:(DJICamera *)camera didUpdateSystemState:(DJICameraSystemState *)systemState
 {
@@ -580,15 +582,19 @@
 
 - (IBAction)captureAction:(id)sender {
     
-    __weak DJICamera *camera = [self fetchCamera];
+    __weak DJICamera* camera = [self fetchCamera];
     if (camera) {
         WeakRef(target);
-        [camera startShootPhotoWithCompletion:^(NSError * _Nullable error) {
-            WeakReturn(target);
-            if (error) {
-                UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Take Photo Error" message:error.description delegate:target cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [errorAlert show];
-            }
+        [camera setShootPhotoMode:DJICameraShootPhotoModeSingle withCompletion:^(NSError * _Nullable error) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [camera startShootPhotoWithCompletion:^(NSError * _Nullable error) {
+                    WeakReturn(target);
+                    if (error) {
+                        UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"Take Photo Error" message:error.description delegate:target cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                        [errorAlert show];
+                    }
+                }];
+            });
         }];
     }
     
@@ -688,7 +694,7 @@
     __weak DJICamera *camera = [self fetchCamera];
     
     if (self.cameraPlaybackState.fileType == DJICameraPlaybackFileTypeVIDEO) {
-        [camera.playbackManager startVideoPlayback];
+        [camera.playbackManager playVideo];
     }
     
 }
@@ -698,7 +704,7 @@
     __weak DJICamera *camera = [self fetchCamera];
     if (self.cameraPlaybackState.fileType == DJICameraPlaybackFileTypeVIDEO) {
         if (self.cameraPlaybackState.videoPlayProgress > 0) {
-            [camera.playbackManager stopVideoPlayback];
+            [camera.playbackManager stopVideo];
         }
     }
     
@@ -718,7 +724,7 @@
 
 - (IBAction)deleteButtonAction:(id)sender {
     
-    self.selectedFileCount = self.cameraPlaybackState.numberOfSelectedFiles;
+    self.selectedFileCount = self.cameraPlaybackState.selectedFileCount;
     
     if (self.cameraPlaybackState.playbackMode == DJICameraPlaybackModeMultipleFilesEdit) {
 
@@ -752,7 +758,7 @@
 
 - (IBAction)downloadButtonAction:(id)sender {
     
-    self.selectedFileCount = self.cameraPlaybackState.numberOfSelectedFiles;
+    self.selectedFileCount = self.cameraPlaybackState.selectedFileCount;
     
     if (self.cameraPlaybackState.playbackMode == DJICameraPlaybackModeMultipleFilesEdit) {
         

@@ -19,7 +19,6 @@
 		A4EFEC7B1B5CDB40000726DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4EFEC791B5CDB40000726DE /* Main.storyboard */; };
 		A4EFEC7D1B5CDB40000726DE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4EFEC7C1B5CDB40000726DE /* Images.xcassets */; };
 		A4EFEC801B5CDB40000726DE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4EFEC7E1B5CDB40000726DE /* LaunchScreen.xib */; };
-		A4EFEC8C1B5CDB40000726DE /* PlaybackDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4EFEC8B1B5CDB40000726DE /* PlaybackDemoTests.m */; };
 		C8F73DDBDF6A8119F1D6350E /* libPods-PlaybackDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F350F08C1F21BD28C40843 /* libPods-PlaybackDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -37,13 +36,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 02A543FC1C3C51CB0083C11B;
 			remoteInfo = VideoPreviewer;
-		};
-		A4EFEC861B5CDB40000726DE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A4EFEC641B5CDB40000726DE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A4EFEC6B1B5CDB40000726DE;
-			remoteInfo = PlaybackDemo;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -81,7 +73,6 @@
 		A4EFEC7A1B5CDB40000726DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A4EFEC7C1B5CDB40000726DE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A4EFEC7F1B5CDB40000726DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		A4EFEC851B5CDB40000726DE /* PlaybackDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlaybackDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4EFEC8A1B5CDB40000726DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A4EFEC8B1B5CDB40000726DE /* PlaybackDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaybackDemoTests.m; sourceTree = "<group>"; };
 		C2F350F08C1F21BD28C40843 /* libPods-PlaybackDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlaybackDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,13 +85,6 @@
 			files = (
 				A41940AB1DCB77690076478C /* VideoPreviewer.framework in Frameworks */,
 				C8F73DDBDF6A8119F1D6350E /* libPods-PlaybackDemo.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A4EFEC821B5CDB40000726DE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,7 +133,6 @@
 			isa = PBXGroup;
 			children = (
 				A4EFEC6C1B5CDB40000726DE /* PlaybackDemo.app */,
-				A4EFEC851B5CDB40000726DE /* PlaybackDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -233,24 +216,6 @@
 			productReference = A4EFEC6C1B5CDB40000726DE /* PlaybackDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A4EFEC841B5CDB40000726DE /* PlaybackDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A4EFEC921B5CDB40000726DE /* Build configuration list for PBXNativeTarget "PlaybackDemoTests" */;
-			buildPhases = (
-				A4EFEC811B5CDB40000726DE /* Sources */,
-				A4EFEC821B5CDB40000726DE /* Frameworks */,
-				A4EFEC831B5CDB40000726DE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A4EFEC871B5CDB40000726DE /* PBXTargetDependency */,
-			);
-			name = PlaybackDemoTests;
-			productName = PlaybackDemoTests;
-			productReference = A4EFEC851B5CDB40000726DE /* PlaybackDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -267,10 +232,6 @@
 								enabled = 0;
 							};
 						};
-					};
-					A4EFEC841B5CDB40000726DE = {
-						CreatedOnToolsVersion = 6.3;
-						TestTargetID = A4EFEC6B1B5CDB40000726DE;
 					};
 				};
 			};
@@ -294,7 +255,6 @@
 			projectRoot = "";
 			targets = (
 				A4EFEC6B1B5CDB40000726DE /* PlaybackDemo */,
-				A4EFEC841B5CDB40000726DE /* PlaybackDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -320,13 +280,6 @@
 				A4EFEC7B1B5CDB40000726DE /* Main.storyboard in Resources */,
 				A4EFEC801B5CDB40000726DE /* LaunchScreen.xib in Resources */,
 				A4EFEC7D1B5CDB40000726DE /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A4EFEC831B5CDB40000726DE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,7 +328,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -392,14 +345,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A4EFEC811B5CDB40000726DE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A4EFEC8C1B5CDB40000726DE /* PlaybackDemoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -407,11 +352,6 @@
 			isa = PBXTargetDependency;
 			name = VideoPreviewer;
 			targetProxy = A41940AD1DCB77690076478C /* PBXContainerItemProxy */;
-		};
-		A4EFEC871B5CDB40000726DE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A4EFEC6B1B5CDB40000726DE /* PlaybackDemo */;
-			targetProxy = A4EFEC861B5CDB40000726DE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -581,42 +521,6 @@
 			};
 			name = Release;
 		};
-		A4EFEC931B5CDB40000726DE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PlaybackDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlaybackDemo.app/PlaybackDemo";
-			};
-			name = Debug;
-		};
-		A4EFEC941B5CDB40000726DE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = "";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PlaybackDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PlaybackDemo.app/PlaybackDemo";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -634,15 +538,6 @@
 			buildConfigurations = (
 				A4EFEC901B5CDB40000726DE /* Debug */,
 				A4EFEC911B5CDB40000726DE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A4EFEC921B5CDB40000726DE /* Build configuration list for PBXNativeTarget "PlaybackDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A4EFEC931B5CDB40000726DE /* Debug */,
-				A4EFEC941B5CDB40000726DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

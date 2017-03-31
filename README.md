@@ -1,7 +1,5 @@
 # iOS-PlaybackDemo
 
-> **Note: This Sample Project is developed based on iOS SDK v3.5.1, an update version for iOS SDK v4.0 will be published soon.**
-
 ## Introduction
 
 This PlaybackDemo is designed for you to learn how to use `DJIPlaybackManager` to access the media resources on the SD card of the aircraft's camera to preview photos, play videos, download or delete files.

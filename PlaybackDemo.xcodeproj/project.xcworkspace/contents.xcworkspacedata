@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:PlaybackDemo.xcodeproj">
+      location = "self:UILibraryDemo.xcodeproj">
    </FileRef>
 </Workspace>

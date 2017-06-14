@@ -2,8 +2,8 @@
 //  main.m
 //  PlaybackDemo
 //
-//  Created by DJI on 20/7/15.
-//  Copyright (c) 2015 DJI. All rights reserved.
+//  Created by DJI on 15/4/2017.
+//  Copyright © 2017 DJI. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

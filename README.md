@@ -8,7 +8,8 @@ This PlaybackDemo is designed for you to learn how to use `DJIPlaybackManager` t
 
  - iOS 9.0+
  - Xcode 8.0+
- - DJI iOS SDK 4.0.1
+ - DJI iOS SDK 4.1.1
+ - DJI iOS UI Library 4.1.1
 
 ## SDK Installation with CocoaPods
 
@@ -37,7 +38,8 @@ If you install it successfully, you should get the messages similar to the follo
 ~~~
 Analyzing dependencies
 Downloading dependencies
-Installing DJI-SDK-iOS (4.0.1)
+Installing DJI-SDK-iOS (4.1.1)
+Installing DJI-UILibrary-iOS (4.1.1)
 Generating Pods project
 Integrating client project
 

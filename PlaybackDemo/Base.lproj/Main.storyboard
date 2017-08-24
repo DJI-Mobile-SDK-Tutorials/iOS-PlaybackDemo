@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="IGQ-Zx-XDs">
-    <device id="ipad9_7" orientation="landscape">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="IGQ-Zx-XDs">
+    <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,11 +19,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="APQ-YS-lEl">
-                                <rect key="frame" x="394.5" y="568" width="235" height="48"/>
+                                <rect key="frame" x="216" y="270" width="235" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="dd2-6b-xCb"/>
                                     <constraint firstAttribute="width" constant="235" id="s7F-rn-8Jc"/>
@@ -37,7 +37,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DJI PlaybackDemo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2U-2V-6TO">
-                                <rect key="frame" x="399" y="71" width="226" height="21"/>
+                                <rect key="frame" x="220.5" y="50" width="226" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="bbH-ka-Qvg"/>
                                     <constraint firstAttribute="width" constant="226" id="dv1-xk-SUV"/>
@@ -47,7 +47,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model: Not Available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kAT-dJ-O9w">
-                                <rect key="frame" x="359.5" y="319" width="305" height="21"/>
+                                <rect key="frame" x="181" y="184" width="305" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="305" id="86e-g0-YXl"/>
                                     <constraint firstAttribute="height" constant="21" id="xGw-CU-V5c"/>
@@ -57,7 +57,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product  Connection Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YEs-2P-9c8">
-                                <rect key="frame" x="317" y="257" width="390" height="21"/>
+                                <rect key="frame" x="138.5" y="122" width="390" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="390" id="Sme-mb-dtk"/>
                                     <constraint firstAttribute="height" constant="21" id="Sx0-8P-N35"/>
@@ -105,11 +105,11 @@
                         <viewControllerLayoutGuide type="bottom" id="m3d-cu-DiW"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hah-kK-YdD">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lZ-0A-QPy">
-                                <rect key="frame" x="976" y="513" width="38" height="38"/>
+                                <rect key="frame" x="622" y="302" width="38" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="38" id="xvA-fm-HbF"/>
                                     <constraint firstAttribute="height" constant="38" id="y7I-xe-Syv"/>
@@ -148,17 +148,17 @@
                         <viewControllerLayoutGuide type="bottom" id="B08-tk-kTN"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dn0-4d-qJz">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ayt-VX-hvb">
-                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                                 <connections>
                                     <segue destination="N9L-6Q-4Aa" kind="embed" id="hOI-ad-9al"/>
                                 </connections>
                             </containerView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WBs-cM-Dx8">
-                                <rect key="frame" x="472" y="344" width="80" height="80"/>
+                                <rect key="frame" x="293.5" y="147.5" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="V9T-gX-Wye"/>
                                     <constraint firstAttribute="height" constant="80" id="auV-c8-TJS"/>
@@ -171,10 +171,10 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PDo-nm-H51" userLabel="PlaybackBtns">
-                                <rect key="frame" x="244" y="33" width="532" height="52"/>
+                                <rect key="frame" x="68" y="15" width="491" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORo-fy-MPu">
-                                        <rect key="frame" x="4" y="6" width="80" height="41"/>
+                                        <rect key="frame" x="4" y="3" width="70" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="7i1-FO-crX">
                                                 <variation key="heightClass=compact-widthClass=compact" constant="70"/>
@@ -189,7 +189,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C86-VQ-3Co">
-                                        <rect key="frame" x="92" y="6" width="80" height="41"/>
+                                        <rect key="frame" x="82" y="3" width="70" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="iAi-iG-94x">
                                                 <variation key="heightClass=compact-widthClass=compact" constant="70"/>
@@ -204,7 +204,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8o3-DE-vzu">
-                                        <rect key="frame" x="358" y="3" width="73" height="47"/>
+                                        <rect key="frame" x="325" y="3" width="70" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="47" id="S7C-sI-Alx">
                                                 <variation key="heightClass=compact-widthClass=compact" constant="35"/>
@@ -221,7 +221,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7lM-MQ-7Oy">
-                                        <rect key="frame" x="266" y="3" width="84" height="47"/>
+                                        <rect key="frame" x="238" y="3" width="80" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="84" id="HNc-0w-NbJ">
                                                 <variation key="heightClass=compact-widthClass=compact" constant="80"/>
@@ -238,7 +238,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrd-Vs-ZI8">
-                                        <rect key="frame" x="180" y="3" width="78" height="47"/>
+                                        <rect key="frame" x="160" y="3" width="70" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="78" id="5nL-8O-PFI">
                                                 <variation key="heightClass=compact-widthClass=compact" constant="70"/>
@@ -255,7 +255,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S7y-dO-jOP">
-                                        <rect key="frame" x="439" y="3" width="89" height="47"/>
+                                        <rect key="frame" x="402" y="3" width="80" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="47" id="CY1-2N-yuQ">
                                                 <variation key="heightClass=compact-widthClass=compact" constant="35"/>
@@ -299,7 +299,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0cW-ea-Esl">
-                                <rect key="frame" x="10" y="38" width="84" height="41"/>
+                                <rect key="frame" x="10" y="18" width="50" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="Tag-oM-nfX">
                                         <variation key="heightClass=regular-widthClass=regular" constant="84"/>
@@ -385,7 +385,7 @@
                         <viewControllerLayoutGuide type="bottom" id="wTg-tr-So5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="W0R-Tr-zQs">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

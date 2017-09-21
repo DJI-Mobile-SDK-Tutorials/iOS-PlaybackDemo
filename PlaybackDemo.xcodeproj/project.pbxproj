@@ -8,22 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		647E867AB06E712200CFF6C0 /* libPods-PlaybackDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5CAD25EBC155F99AEB99763 /* libPods-PlaybackDemo.a */; };
-		A48131DB1EC46DCD00F214B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A48131D41EC46DCD00F214B1 /* AppDelegate.m */; };
-		A48131DC1EC46DCD00F214B1 /* DefaultLayoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48131D61EC46DCD00F214B1 /* DefaultLayoutViewController.m */; };
-		A48131DD1EC46DCD00F214B1 /* DemoUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A48131D81EC46DCD00F214B1 /* DemoUtility.m */; };
-		A48131DE1EC46DCD00F214B1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48131DA1EC46DCD00F214B1 /* MainViewController.m */; };
-		A48131E41EC46E2700F214B1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A48131E01EC46E2700F214B1 /* LaunchScreen.storyboard */; };
-		A48131E51EC46E2700F214B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A48131E21EC46E2700F214B1 /* Main.storyboard */; };
-		A48131EA1EC46E3900F214B1 /* DJIPlaybackMultiSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48131E71EC46E3900F214B1 /* DJIPlaybackMultiSelectViewController.m */; };
-		A48131EB1EC46E3900F214B1 /* PlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A48131E91EC46E3900F214B1 /* PlaybackViewController.m */; };
-		A48131EF1EC46E4B00F214B1 /* DJIPlaybackMultiSelectViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48131EC1EC46E4B00F214B1 /* DJIPlaybackMultiSelectViewController_iPad.xib */; };
-		A48131F01EC46E4B00F214B1 /* DJIPlaybackMultiSelectViewController_iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48131ED1EC46E4B00F214B1 /* DJIPlaybackMultiSelectViewController_iPhone6.xib */; };
-		A48131F11EC46E4B00F214B1 /* DJIPlaybackMultiSelectViewController_iPhone6+.xib in Resources */ = {isa = PBXBuildFile; fileRef = A48131EE1EC46E4B00F214B1 /* DJIPlaybackMultiSelectViewController_iPhone6+.xib */; };
-		A48131F51EC46E5B00F214B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A48131F31EC46E5B00F214B1 /* main.m */; };
-		A48131F71EC46E7000F214B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A48131F61EC46E7000F214B1 /* Assets.xcassets */; };
-		A48131F91EC46F2700F214B1 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A48131F21EC46E5B00F214B1 /* Info.plist */; };
 		A48847EB1EA26B0200CE5843 /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A48847E51EA26AEC00CE5843 /* VideoPreviewer.framework */; };
 		A48847EC1EA26B0200CE5843 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A48847E51EA26AEC00CE5843 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A4E00E881F73640C0023C6F0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E00E721F73640C0023C6F0 /* AppDelegate.m */; };
+		A4E00E891F73640C0023C6F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4E00E731F73640C0023C6F0 /* Assets.xcassets */; };
+		A4E00E8A1F73640C0023C6F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4E00E741F73640C0023C6F0 /* LaunchScreen.storyboard */; };
+		A4E00E8B1F73640C0023C6F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4E00E761F73640C0023C6F0 /* Main.storyboard */; };
+		A4E00E8C1F73640C0023C6F0 /* DefaultLayoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E00E791F73640C0023C6F0 /* DefaultLayoutViewController.m */; };
+		A4E00E8D1F73640C0023C6F0 /* DemoUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E00E7B1F73640C0023C6F0 /* DemoUtility.m */; };
+		A4E00E8E1F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E00E7D1F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController.m */; };
+		A4E00E8F1F73640C0023C6F0 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A4E00E7E1F73640C0023C6F0 /* Info.plist */; };
+		A4E00E901F73640C0023C6F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E00E7F1F73640C0023C6F0 /* main.m */; };
+		A4E00E911F73640C0023C6F0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E00E811F73640C0023C6F0 /* MainViewController.m */; };
+		A4E00E921F73640C0023C6F0 /* PlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E00E831F73640C0023C6F0 /* PlaybackViewController.m */; };
+		A4E00E931F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E00E851F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController_iPad.xib */; };
+		A4E00E941F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController_iPhone6+.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E00E861F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController_iPhone6+.xib */; };
+		A4E00E951F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController_iPhone6.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E00E871F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController_iPhone6.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,28 +60,28 @@
 /* Begin PBXFileReference section */
 		6E44FC47D98B416B82B08048 /* Pods-PlaybackDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaybackDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PlaybackDemo/Pods-PlaybackDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		8D038CCF8617728F1DAE4F88 /* Pods-PlaybackDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlaybackDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-PlaybackDemo/Pods-PlaybackDemo.release.xcconfig"; sourceTree = "<group>"; };
-		A48131D31EC46DCD00F214B1 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = PlaybackDemo/AppDelegate.h; sourceTree = SOURCE_ROOT; };
-		A48131D41EC46DCD00F214B1 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = PlaybackDemo/AppDelegate.m; sourceTree = SOURCE_ROOT; };
-		A48131D51EC46DCD00F214B1 /* DefaultLayoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefaultLayoutViewController.h; path = PlaybackDemo/DefaultLayoutViewController.h; sourceTree = SOURCE_ROOT; };
-		A48131D61EC46DCD00F214B1 /* DefaultLayoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DefaultLayoutViewController.m; path = PlaybackDemo/DefaultLayoutViewController.m; sourceTree = SOURCE_ROOT; };
-		A48131D71EC46DCD00F214B1 /* DemoUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DemoUtility.h; path = PlaybackDemo/DemoUtility.h; sourceTree = SOURCE_ROOT; };
-		A48131D81EC46DCD00F214B1 /* DemoUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DemoUtility.m; path = PlaybackDemo/DemoUtility.m; sourceTree = SOURCE_ROOT; };
-		A48131D91EC46DCD00F214B1 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = PlaybackDemo/MainViewController.h; sourceTree = SOURCE_ROOT; };
-		A48131DA1EC46DCD00F214B1 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = PlaybackDemo/MainViewController.m; sourceTree = SOURCE_ROOT; };
-		A48131E11EC46E2700F214B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = PlaybackDemo/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
-		A48131E31EC46E2700F214B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = PlaybackDemo/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
-		A48131E61EC46E3900F214B1 /* DJIPlaybackMultiSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DJIPlaybackMultiSelectViewController.h; path = PlaybackDemo/DJIPlaybackMultiSelectViewController.h; sourceTree = SOURCE_ROOT; };
-		A48131E71EC46E3900F214B1 /* DJIPlaybackMultiSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DJIPlaybackMultiSelectViewController.m; path = PlaybackDemo/DJIPlaybackMultiSelectViewController.m; sourceTree = SOURCE_ROOT; };
-		A48131E81EC46E3900F214B1 /* PlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaybackViewController.h; path = PlaybackDemo/PlaybackViewController.h; sourceTree = SOURCE_ROOT; };
-		A48131E91EC46E3900F214B1 /* PlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaybackViewController.m; path = PlaybackDemo/PlaybackViewController.m; sourceTree = SOURCE_ROOT; };
-		A48131EC1EC46E4B00F214B1 /* DJIPlaybackMultiSelectViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DJIPlaybackMultiSelectViewController_iPad.xib; path = PlaybackDemo/xibs/DJIPlaybackMultiSelectViewController_iPad.xib; sourceTree = SOURCE_ROOT; };
-		A48131ED1EC46E4B00F214B1 /* DJIPlaybackMultiSelectViewController_iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DJIPlaybackMultiSelectViewController_iPhone6.xib; path = PlaybackDemo/xibs/DJIPlaybackMultiSelectViewController_iPhone6.xib; sourceTree = SOURCE_ROOT; };
-		A48131EE1EC46E4B00F214B1 /* DJIPlaybackMultiSelectViewController_iPhone6+.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "DJIPlaybackMultiSelectViewController_iPhone6+.xib"; path = "PlaybackDemo/xibs/DJIPlaybackMultiSelectViewController_iPhone6+.xib"; sourceTree = SOURCE_ROOT; };
-		A48131F21EC46E5B00F214B1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = PlaybackDemo/Info.plist; sourceTree = SOURCE_ROOT; };
-		A48131F31EC46E5B00F214B1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PlaybackDemo/main.m; sourceTree = SOURCE_ROOT; };
-		A48131F61EC46E7000F214B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = PlaybackDemo/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		A48847C51EA2697F00CE5843 /* PlaybackDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlaybackDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A48847E01EA26AEC00CE5843 /* VideoPreviewer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VideoPreviewer.xcodeproj; path = Frameworks/VideoPreviewer/VideoPreviewer.xcodeproj; sourceTree = "<group>"; };
+		A4E00E711F73640C0023C6F0 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A4E00E721F73640C0023C6F0 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A4E00E731F73640C0023C6F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A4E00E751F73640C0023C6F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A4E00E771F73640C0023C6F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A4E00E781F73640C0023C6F0 /* DefaultLayoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultLayoutViewController.h; sourceTree = "<group>"; };
+		A4E00E791F73640C0023C6F0 /* DefaultLayoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultLayoutViewController.m; sourceTree = "<group>"; };
+		A4E00E7A1F73640C0023C6F0 /* DemoUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoUtility.h; sourceTree = "<group>"; };
+		A4E00E7B1F73640C0023C6F0 /* DemoUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoUtility.m; sourceTree = "<group>"; };
+		A4E00E7C1F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJIPlaybackMultiSelectViewController.h; sourceTree = "<group>"; };
+		A4E00E7D1F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJIPlaybackMultiSelectViewController.m; sourceTree = "<group>"; };
+		A4E00E7E1F73640C0023C6F0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A4E00E7F1F73640C0023C6F0 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A4E00E801F73640C0023C6F0 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		A4E00E811F73640C0023C6F0 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		A4E00E821F73640C0023C6F0 /* PlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackViewController.h; sourceTree = "<group>"; };
+		A4E00E831F73640C0023C6F0 /* PlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaybackViewController.m; sourceTree = "<group>"; };
+		A4E00E851F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJIPlaybackMultiSelectViewController_iPad.xib; sourceTree = "<group>"; };
+		A4E00E861F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController_iPhone6+.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DJIPlaybackMultiSelectViewController_iPhone6+.xib"; sourceTree = "<group>"; };
+		A4E00E871F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController_iPhone6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DJIPlaybackMultiSelectViewController_iPhone6.xib; sourceTree = "<group>"; };
 		C5CAD25EBC155F99AEB99763 /* libPods-PlaybackDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlaybackDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -119,7 +119,7 @@
 		A48847BC1EA2697F00CE5843 = {
 			isa = PBXGroup;
 			children = (
-				A48847C71EA2697F00CE5843 /* PlaybackDemo */,
+				A4E00E701F73640C0023C6F0 /* PlaybackDemo */,
 				A48847C61EA2697F00CE5843 /* Products */,
 				0F0E1DC1BEF7692DD4F331BE /* Pods */,
 				26FD7018B7700DA45E0BD5F8 /* Frameworks */,
@@ -134,36 +134,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A48847C71EA2697F00CE5843 /* PlaybackDemo */ = {
-			isa = PBXGroup;
-			children = (
-				A48131D71EC46DCD00F214B1 /* DemoUtility.h */,
-				A48131D81EC46DCD00F214B1 /* DemoUtility.m */,
-				A48131D31EC46DCD00F214B1 /* AppDelegate.h */,
-				A48131D41EC46DCD00F214B1 /* AppDelegate.m */,
-				A48131D91EC46DCD00F214B1 /* MainViewController.h */,
-				A48131DA1EC46DCD00F214B1 /* MainViewController.m */,
-				A48131D51EC46DCD00F214B1 /* DefaultLayoutViewController.h */,
-				A48131D61EC46DCD00F214B1 /* DefaultLayoutViewController.m */,
-				A48847F91EA4ACD700CE5843 /* PlaybackView */,
-				A48131F21EC46E5B00F214B1 /* Info.plist */,
-				A48131E01EC46E2700F214B1 /* LaunchScreen.storyboard */,
-				A48131E21EC46E2700F214B1 /* Main.storyboard */,
-				A48131F61EC46E7000F214B1 /* Assets.xcassets */,
-				A48847C81EA2697F00CE5843 /* Supporting Files */,
-			);
-			name = PlaybackDemo;
-			path = UILibraryDemo;
-			sourceTree = "<group>";
-		};
-		A48847C81EA2697F00CE5843 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				A48131F31EC46E5B00F214B1 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		A48847E11EA26AEC00CE5843 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,24 +142,37 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A48847F91EA4ACD700CE5843 /* PlaybackView */ = {
+		A4E00E701F73640C0023C6F0 /* PlaybackDemo */ = {
 			isa = PBXGroup;
 			children = (
-				A48131E81EC46E3900F214B1 /* PlaybackViewController.h */,
-				A48131E91EC46E3900F214B1 /* PlaybackViewController.m */,
-				A48131E61EC46E3900F214B1 /* DJIPlaybackMultiSelectViewController.h */,
-				A48131E71EC46E3900F214B1 /* DJIPlaybackMultiSelectViewController.m */,
-				A48847FD1EA4B49400CE5843 /* xibs */,
+				A4E00E711F73640C0023C6F0 /* AppDelegate.h */,
+				A4E00E721F73640C0023C6F0 /* AppDelegate.m */,
+				A4E00E731F73640C0023C6F0 /* Assets.xcassets */,
+				A4E00E741F73640C0023C6F0 /* LaunchScreen.storyboard */,
+				A4E00E761F73640C0023C6F0 /* Main.storyboard */,
+				A4E00E781F73640C0023C6F0 /* DefaultLayoutViewController.h */,
+				A4E00E791F73640C0023C6F0 /* DefaultLayoutViewController.m */,
+				A4E00E7A1F73640C0023C6F0 /* DemoUtility.h */,
+				A4E00E7B1F73640C0023C6F0 /* DemoUtility.m */,
+				A4E00E7C1F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController.h */,
+				A4E00E7D1F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController.m */,
+				A4E00E7E1F73640C0023C6F0 /* Info.plist */,
+				A4E00E7F1F73640C0023C6F0 /* main.m */,
+				A4E00E801F73640C0023C6F0 /* MainViewController.h */,
+				A4E00E811F73640C0023C6F0 /* MainViewController.m */,
+				A4E00E821F73640C0023C6F0 /* PlaybackViewController.h */,
+				A4E00E831F73640C0023C6F0 /* PlaybackViewController.m */,
+				A4E00E841F73640C0023C6F0 /* xibs */,
 			);
-			name = PlaybackView;
+			path = PlaybackDemo;
 			sourceTree = "<group>";
 		};
-		A48847FD1EA4B49400CE5843 /* xibs */ = {
+		A4E00E841F73640C0023C6F0 /* xibs */ = {
 			isa = PBXGroup;
 			children = (
-				A48131EC1EC46E4B00F214B1 /* DJIPlaybackMultiSelectViewController_iPad.xib */,
-				A48131ED1EC46E4B00F214B1 /* DJIPlaybackMultiSelectViewController_iPhone6.xib */,
-				A48131EE1EC46E4B00F214B1 /* DJIPlaybackMultiSelectViewController_iPhone6+.xib */,
+				A4E00E851F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController_iPad.xib */,
+				A4E00E861F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController_iPhone6+.xib */,
+				A4E00E871F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController_iPhone6.xib */,
 			);
 			path = xibs;
 			sourceTree = "<group>";
@@ -274,13 +257,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A48131E51EC46E2700F214B1 /* Main.storyboard in Resources */,
-				A48131EF1EC46E4B00F214B1 /* DJIPlaybackMultiSelectViewController_iPad.xib in Resources */,
-				A48131F11EC46E4B00F214B1 /* DJIPlaybackMultiSelectViewController_iPhone6+.xib in Resources */,
-				A48131E41EC46E2700F214B1 /* LaunchScreen.storyboard in Resources */,
-				A48131F71EC46E7000F214B1 /* Assets.xcassets in Resources */,
-				A48131F01EC46E4B00F214B1 /* DJIPlaybackMultiSelectViewController_iPhone6.xib in Resources */,
-				A48131F91EC46F2700F214B1 /* Info.plist in Resources */,
+				A4E00E8A1F73640C0023C6F0 /* LaunchScreen.storyboard in Resources */,
+				A4E00E8B1F73640C0023C6F0 /* Main.storyboard in Resources */,
+				A4E00E931F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController_iPad.xib in Resources */,
+				A4E00E941F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController_iPhone6+.xib in Resources */,
+				A4E00E951F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController_iPhone6.xib in Resources */,
+				A4E00E8F1F73640C0023C6F0 /* Info.plist in Resources */,
+				A4E00E891F73640C0023C6F0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,13 +322,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A48131DE1EC46DCD00F214B1 /* MainViewController.m in Sources */,
-				A48131EA1EC46E3900F214B1 /* DJIPlaybackMultiSelectViewController.m in Sources */,
-				A48131DD1EC46DCD00F214B1 /* DemoUtility.m in Sources */,
-				A48131DB1EC46DCD00F214B1 /* AppDelegate.m in Sources */,
-				A48131DC1EC46DCD00F214B1 /* DefaultLayoutViewController.m in Sources */,
-				A48131F51EC46E5B00F214B1 /* main.m in Sources */,
-				A48131EB1EC46E3900F214B1 /* PlaybackViewController.m in Sources */,
+				A4E00E8D1F73640C0023C6F0 /* DemoUtility.m in Sources */,
+				A4E00E911F73640C0023C6F0 /* MainViewController.m in Sources */,
+				A4E00E881F73640C0023C6F0 /* AppDelegate.m in Sources */,
+				A4E00E8E1F73640C0023C6F0 /* DJIPlaybackMultiSelectViewController.m in Sources */,
+				A4E00E921F73640C0023C6F0 /* PlaybackViewController.m in Sources */,
+				A4E00E8C1F73640C0023C6F0 /* DefaultLayoutViewController.m in Sources */,
+				A4E00E901F73640C0023C6F0 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,18 +343,18 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A48131E01EC46E2700F214B1 /* LaunchScreen.storyboard */ = {
+		A4E00E741F73640C0023C6F0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A48131E11EC46E2700F214B1 /* Base */,
+				A4E00E751F73640C0023C6F0 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		A48131E21EC46E2700F214B1 /* Main.storyboard */ = {
+		A4E00E761F73640C0023C6F0 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A48131E31EC46E2700F214B1 /* Base */,
+				A4E00E771F73640C0023C6F0 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

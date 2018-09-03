@@ -62,6 +62,7 @@ installed.
  - Phantom 3 4K
  - Phantom 3 Advanced
  - Mavic Pro
+ - Mavic 2 Series
  - Phantom 4 Pro
  - Inspire 2
 

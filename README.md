@@ -10,6 +10,7 @@ This PlaybackDemo is designed for you to learn how to use `DJIPlaybackManager` t
  - Xcode 8.0+
  - DJI iOS SDK 4.7.1
  - DJI iOS UX SDK 4.7.1
+ - DJIWidget 1.0
 
 ## SDK Installation with CocoaPods
 
@@ -25,7 +26,7 @@ sudo gem install cocoapods
 
 The process may take a long time, please wait. For further installation instructions, please check [this guide](https://guides.cocoapods.org/using/getting-started.html#getting-started).
 
-**2.** Install SDK with CocoaPods in the Project
+**2.** Install SDK and DJIWidget with CocoaPods in the Project
 
 Run the following command in the project's path:
 
@@ -40,6 +41,7 @@ Analyzing dependencies
 Downloading dependencies
 Installing DJI-SDK-iOS (4.7.1)
 Installing DJI-UXSDK-iOS (4.7.1)
+Installing DJIWidget (1.0)
 Generating Pods project
 Integrating client project
 
